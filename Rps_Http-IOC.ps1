@@ -1,8 +1,8 @@
-#Rps_Http ClientInfo IOC search
+# Rps_Http ClientInfo IOC search
 #
-#Credits: CrowdStrike, Inc. (Erik Iker, Sean Palka, Brian Pitchford, Nicolas Zilio)
+# Credits: CrowdStrike, Inc. (Erik Iker, Sean Palka, Brian Pitchford, Nicolas Zilio)
 #
-#Summary: Analysis of ClientInfo value in Rps_Http logs indicated that attempted 
+# Summary: Analysis of ClientInfo value in Rps_Http logs indicated that attempted 
 # exploitation via proxied requests would result in an entry with the TA UserAgent for the
 # ClientInfo value. Normal usage would have predictable ClientInfo value of '',
 # 'Microsoft WinRM Client', or 'Exchange BackEnd Probes'. 
@@ -11,9 +11,9 @@
 # to target the vulnerability.
 #
 # This script assumes the column headers for the Rpc_Http logs have not been modified from their
-#  original order/format.
+# original order/format.
 #
-#Usage: powershell .\Rps_Http-IOC.ps1 'C:\Program Files\Microsoft\Exchange Server\V15\Logging\CmdletInfra\Powershell-Proxy\Http'
+# Usage: powershell .\Rps_Http-IOC.ps1 'C:\Program Files\Microsoft\Exchange Server\V15\Logging\CmdletInfra\Powershell-Proxy\Http'
 
 
 #Read path to files
@@ -38,7 +38,7 @@ $logs = @();
 $paths = @();
 $users = @();
 
-#Recurse through directoty, only look at Rps_Http logs
+#Recurse through directory, only look at Rps_Http logs
 write-host "Finding Rps_Http logs in $path..."
 $files = Get-ChildItem $path -Filter "*Rps_Http_20*" -Recurse 
 Foreach ($file in $files)
@@ -80,7 +80,7 @@ $logs = $logs | sort -unique
 if(($success -gt 0) -or ($fail -gt 0)){
 	write-host "#######################################################"
 	write-host "Summary:"
-	write-host "   $success instances of possible succesful proxied exploitation found using UA indicator"
+	write-host "   $success instances of possible successful proxied exploitation found using UA indicator"
 	write-host "   $fail instances of failed proxied exploitation attempts found using UA indicator"
 	write-host "#######################################################"
 	write-host "Network paths used for exploitation attempts:"
